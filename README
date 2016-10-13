@@ -1,0 +1,24 @@
+This code is designed to perform hardware RS232 snooping. I decided to write it when I realized that how expensive commercial
+solutions were.
+
+===How it works===
+
+Its really not even that complicated! In short, it is reading from two different serial interfaces at the same time and logs the
+results with a timestamp.
+
+===Building your own Cable===
+
+The most complicated part of this is to build the custom cable. You could buy one off-line, but they're crazy expensive for such a
+simple circuit. RS-232 transmits data over pin 3 and receives data over pin 2. You must build a cable that is a simple male-to-female
+passthrough. Then you must put the "tap" ports in series. One side must connect the pin 3 to the pin 3 of the receiving connector, and
+the other must connect pin 2 to pin 3 of the receiving connector. Both connectors must also connect pin 5 to pin 5.
+
+A diagram is full-duplex-cable.gif.
+
+===Compile and Running===
+
+Plug in two USB-to-serial devices into your Linux box.
+(It should also work with a /dev/ttyS0 device, but my ttyS0 is acting odd.)
+
+cc serialsnoop.c -o serialsnoop
+./snoop /dev/ttyUSB0 /dev/ttyUSB1
